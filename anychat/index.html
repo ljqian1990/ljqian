@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript"src="anychatsdk.js"charset="UTF-8"></script>
+<script type="text/javascript"src="anychatevent.js"charset="UTF-8"></script>
+<script>
+var mDefaultServerAddr ="demo.anychat.cn";
+var mDefaultServerPort = 8906;
+var mSelfUserId = -1;
+var mTargetUserId = -1;
+function LogicInit(){
+	varNEED_ANYCHAT_APILEVEL = "0";
+    varerrorcode = BRAC_InitSDK(NEED_ANYCHAT_APILEVEL);
+    if(errorcode == GV_ERR_SUCCESS)
+    	document.getElementById("login_div").style.display ="block"; 
+    else
+    	document.getElementById("prompt_div").style.display ="block"; 
+}
+
+function LoginToHall() {
+	BRAC_Connect(mDefaultServerAddr, mDefaultServerPort);
+	BRAC_Login(document.getElementById("username").value, "",0);
+}
+
+function OnAnyChatConnect(bSuccess, errorcode) {
+    if(errorcode == 0) { 
+    	console.log('connected success');
+    }else
+    	alert("connected failed");  
+}
+
+function OnAnyChatLoginSystem(dwUserId, errorcode) {
+    if(errorcode == 0) {
+    	mSelfUserId = dwUserId; 
+        document.getElementById("login_div").style.display ="none";
+        document.getElementById("hall_div").style.display ="block";
+    }
+}
+
+function EnterRoom(){
+	BRAC_EnterRoom(parseInt(document.getElementById("customroomid").value),"", 0); 
+}
+
+function OnAnyChatEnterRoom(dwRoomId, errorcode) {
+	if(errorcode == 0) {
+		document.getElementById("hall_div").style.display = "none";
+		document.getElementById("room_div").style.display ="block";
+		BRAC_UserCameraControl(mSelfUserId, 1);
+		BRAC_UserSpeakControl(mSelfUserId, 1);
+		BRAC_SetVideoPos(mSelfUserId,document.getElementById("AnyChatLocalVideoDiv"),"ANYCHAT_VIDEO_LOCAL");	       
+	    BRAC_SetVideoPos(0, document.getElementById("AnyChatRemoteVideoDiv"),"ANYCHAT_VIDEO_REMOTE");
+	}
+}
+
+function OnAnyChatRoomOnlineUser(dwUserCount, dwRoomId) {
+	if(mTargetUserId != -1) {
+		BRAC_UserCameraControl(mTargetUserId, 0);
+		BRAC_UserSpeakControl(mTargetUserId, 0);
+		mTargetUserId = -1;
+	}
+	
+	if(dwUserCount > 1)
+		SetTheVideo();
+}
+
+function OnAnyChatUserAtRoom(dwUserId, bEnterRoom) {
+	if(bEnterRoom == 1)
+       if (mTargetUserId == -1) SetTheVideo();
+    else {
+       if (mTargetUserId == dwUserId)
+           mTargetUserId = -1;
+    }
+}
+
+function SendMessage() {
+	BRAC_SendTextMessage(0, 0,document.getElementById("SendMsg").innerHTML);
+	document.getElementById("ReceiveMsg").innerHTML += "我：" + document.getElementById("SendMsg").innerHTML +"<br />";
+	document.getElementById("SendMsg").innerHTML = "";
+}
+
+function OnAnyChatTextMessage(dwFromUserId, dwToUserId, bSecret, lpMsgBuf, dwLen) {
+	document.getElementById("ReceiveMsg").innerHTML +=BRAC_GetUserName(dwFromUserId) + "：" + lpMsgBuf +"<br />";
+}
+
+function SetTheVideo() {
+	varuseridlist = BRAC_GetOnlineUser();
+	BRAC_UserCameraControl(useridlist[0], 1);
+	BRAC_UserSpeakControl(useridlist[0], 1);
+	BRAC_SetVideoPos(useridlist[0],document.getElementById("AnyChatRemoteVideoDiv"),"ANYCHAT_VIDEO_REMOTE");
+	mTargetUserId = useridlist[0];
+}
+
+function OutOfSystem(){       
+	BRAC_Logout();
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>

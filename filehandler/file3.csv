@@ -1,0 +1,122 @@
+errno.EPERM,Operation not permitted,操作不被允许
+errno.ENOENT,No such file or directory,没有这样的文件或目录
+errno.ESRCH,No such process,没有这样的过稿
+errno.EINTR,Interrupted system call,中断的系统调甿
+errno.EIO,I/O error,I / O错误
+errno.ENXIO,No such device or address,没有这样的设备或地址
+errno.E2BIG,Arg list too long,精氨酸列表太长
+errno.ENOEXEC,Exec format error,Exec的格式错诿
+errno.EBADF,Bad file number,错误的文件数
+errno.ECHILD,No child processes,无子进程
+errno.EAGAIN,Try again,再试一欿
+errno.ENOMEM,Out of memory,内存不足
+errno.EACCES,Permission denied,没有权限
+errno.EFAULT,Bad address,错误的地址
+errno.ENOTBLK,Block device required,需要块设备
+errno.EBUSY,Device or resource busy,设备或资源忙
+errno.EEXIST,File exists,文件存在
+errno.EXDEV,Cross-device link,跨设备链掿
+errno.ENODEV,No such device,没有这样的设夿
+errno.ENOTDIR,Not a directory,不是一个目彿
+errno.EISDIR,Is a directory,是一个目彿
+errno.EINVAL,Invalid argument,参数无效
+errno.ENFILE,File table overflow,文件表溢凿
+errno.EMFILE,Too many open files,打开的文件太夿
+errno.ENOTTY,Not a typewriter,不是打字朿
+errno.ETXTBSY,Text file busy,文本文件忿
+errno.EFBIG,File too large,文件过大
+errno.ENOSPC,No space left on device,设备上没有剩余空闿
+errno.ESPIPE,Illegal seek,非法谋取
+errno.EROFS,Read-only file system,只读文件系统
+errno.EMLINK,Too many links,太多的链掿
+errno.EPIPE,Broken pipe,断管
+errno.EDOM,Math argument out of domain of func,数学参数超出函数埿
+errno.ERANGE,Math result not representable,数学结果没有代表怿
+errno.EDEADLK,Resource deadlock would occur,会发生资源死锿
+errno.ENAMETOOLONG,File name too long,文件名过长
+errno.ENOLCK,No record locks available,没有可用的记录锁
+errno.ENOSYS,Function not implemented,功能未实玿
+errno.ENOTEMPTY,Directory not empty,目录非空
+errno.ELOOP,Too many symbolic links encountered,遇到了太多的符号链接
+errno.EWOULDBLOCK,Operation would block,操作将阻塿
+errno.ENOMSG,No message of desired type,所需类型的无消息
+errno.EIDRM,Identifier removed,标识去掉
+errno.ECHRNG,Channel number out of range,通道号超出范囿
+errno.EL2NSYNC,Level 2 not synchronized,2级不同步
+errno.EL3HLT,Level 3 halted,3级叫偿
+errno.EL3RST,Level 3 reset,3级复使
+errno.ELNRNG,Link number out of range,链接数量超出范围
+errno.EUNATCH,Protocol driver not attached,Protocol驱动程序不附
+errno.ENOCSI,No CSI structure available,没有CSI结构可用
+errno.EL2HLT,Level 2 halted,2级叫偿
+errno.EBADE,Invalid exchange,无效的交捿
+errno.EBADR,Invalid request descriptor,无效的请求描述符
+errno.EXFULL,Exchange full,交易所兿
+errno.ENOANO,No anode,无阳枿
+errno.EBADRQC,Invalid request code,无效的请求代砿
+errno.EBADSLT,Invalid slot,无效的插槿
+errno.EDEADLOCK,File locking deadlock error,文件锁定死锁错误
+errno.EBFONT,Bad font file format,坏字体文件格弿
+errno.ENOSTR,Device not a stream,设备未流
+errno.ENODATA,No data available,无可用数捿
+errno.ETIME,Timer expired,计时器到朿
+errno.ENOSR,Out of streams resources,出流资源
+errno.ENONET,Machine is not on the network,机是不是在网络上
+errno.ENOPKG,Package not installed,不打包安裿
+errno.EREMOTE,Object is remote,对象是远程的
+errno.ENOLINK,Link has been severed,链路被切斿
+errno.EADV,Advertise error,广告错误
+errno.ESRMNT,Srmount error,Srmount错误
+errno.ECOMM,Communication error on send,在发送通信错误
+errno.EPROTO,Protocol error,协议错误
+errno.EMULTIHOP,Multihop attempted,多跳未遂
+errno.EDOTDOT,RFS specific error,RFS特定的错诿
+errno.EBADMSG,Not a data message,没有数据消息
+errno.EOVERFLOW,Value too large for defined data type,值过大，定义的数据类垿
+errno.ENOTUNIQ,Name not unique on network,名称网络不是唯一
+errno.EBADFD,File descriptor in bad state,在状态不好的文件描述笿
+errno.EREMCHG,Remote address changed,远程地址变更
+errno.ELIBACC,Can not access a needed shared library,无法访问所需的共享库
+errno.ELIBBAD,Accessing a corrupted shared library,访问损坏的共享库
+errno.ELIBSCN,.lib section in a.out corrupted,a.out中的.lib部分损坏
+errno.ELIBMAX,Attempting to link in too many shared libraries,尝试太多的共享库链接
+errno.ELIBEXEC,Cannot exec a shared library directly,不能直接Exec的共享库
+errno.EILSEQ,Illegal byte sequence,非法字节序列
+errno.ERESTART,Interrupted system call should be restarted,中断的系统调用应重新启动
+errno.ESTRPIPE,Streams pipe error,流管的错诿
+errno.EUSERS,Too many users,用户太多
+errno.ENOTSOCK,Socket operation on non-socket,非插槽Socket操作
+errno.EDESTADDRREQ,Destination address required,所需的目标地址
+errno.EMSGSIZE,Message too long,消息太长
+errno.EPROTOTYPE,Protocol wrong type for socket,协议错误类型插座
+errno.ENOPROTOOPT,Protocol not available,没有可用的协访
+errno.EPROTONOSUPPORT,Protocol not supported,不支持协访
+errno.ESOCKTNOSUPPORT,Socket type not supported,不支持套接字类型
+errno.EOPNOTSUPP,Operation not supported on transport endpoint,操作上不支持传输端点
+errno.EPFNOSUPPORT,Protocol family not supported,不支持协议的家庭
+errno.EAFNOSUPPORT,Address family not supported by protocol,地址族不支持的协访
+errno.EADDRINUSE,Address already in use,在使用地址巿
+errno.EADDRNOTAVAIL,Cannot assign requested address,无法分配请求的地址
+errno.ENETDOWN,Network is down,网络已关闿
+errno.ENETUNREACH,Network is unreachable,网络不可辿
+errno.ENETRESET,Network dropped connection because of reset,网络丢弃，因为重置连掿
+errno.ECONNABORTED,Software caused connection abort,软件导致连接中断
+errno.ECONNRESET,Connection reset by peer,将连接复使
+errno.ENOBUFS,No buffer space available,没有可用的缓冲空闿
+errno.EISCONN,Transport endpoint is already connected,传输端点已经连接
+errno.ENOTCONN,Transport endpoint is not connected,交通运输端点没有连掿
+errno.ESHUTDOWN,Cannot send after transport endpoint shutdown,无法发送传输端点关闭后
+errno.ETOOMANYREFS,Too many references: cannot splice,引用过多：无法接吿
+errno.ETIMEDOUT,Connection timed out,连接超时
+errno.ECONNREFUSED,Connection refused,连接被拒绿
+errno.EHOSTDOWN,Host is down,主机已关闿
+errno.EHOSTUNREACH,No route to host,没有到主机的路由
+errno.EALREADY,Operation already in progress,操作已在进行丿
+errno.EINPROGRESS,Operation now in progress,现在进行操作
+errno.ESTALE,Stale NFS file handle,陈旧NFS文件句柄
+errno.EUCLEAN,Structure needs cleaning,结构需要清洿
+errno.ENOTNAM,Not a XENIX named type file,不是XENIX命名的文件类垿
+errno.ENAVAIL,No XENIX semaphores available,无可用XENIX信号灿
+errno.EISNAM,Is a named type file,一个名为类型的文件
+errno.EREMOTEIO,Remote I/O error,远程I / O错误
+errno.EDQUOT,Quota exceeded,超出配额

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<a href="javascript:void(0);" id="test">test</a>
+<script>
+
+
+;(function (){
+	function getRandom(num){
+		return Math.ceil(Math.random()*num);
+	}
+	var arr = new Array('http://download16.ztgame.com.cn/Titan_old_20121127R1.rar', 'http://download16.ztgame.com.cn/Titan_setup_20140327.rar');
+	var random = getRandom(arr.length)-1;
+	var url = arr[random];
+	var test = document.getElementById('test');
+	test.href = url;
+	test.innerHTML = url;
+})();
+
+</script>
+</body>
+</html>

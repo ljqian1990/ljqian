@@ -1,0 +1,37 @@
+[
+    {
+        "name": "piwik/ini",
+        "version": "1.0.6",
+        "version_normalized": "1.0.6.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/piwik/component-ini.git",
+            "reference": "bd2711ba4d5e20e4ca09b6829dc2831576b59dc3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/piwik/component-ini/zipball/bd2711ba4d5e20e4ca09b6829dc2831576b59dc3",
+            "reference": "bd2711ba4d5e20e4ca09b6829dc2831576b59dc3",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "athletic/athletic": "0.1.*",
+            "phpunit/phpunit": "~4.0"
+        },
+        "time": "2016-01-14 21:13:33",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Piwik\\Ini\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-3.0"
+        ]
+    }
+]

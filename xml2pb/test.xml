@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.4.10" version="2.0"
+	xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+                      http://pear.php.net/dtd/tasks-1.0.xsd
+                      http://pear.php.net/dtd/package-2.0
+                      http://pear.php.net/dtd/package-2.0.xsd">
+	<name req="required" type="string">PHP_Timer</name>
+	<channel req="required" type="string">pear.phpunit.de</channel>
+	<summary req="required" type="string">Utility class for timing</summary>
+	<description req="required" type="string">Utility class for timing</description>
+	<lead>
+		<name req="required" type="string">Sebastian Bergmann</name>
+		<user req="required" type="string">sb</user>
+		<email req="required" type="string">sb@sebastian-bergmann.de</email>
+		<active req="required" type="string">yes</active>
+	</lead>
+	<date req="required" type="string">2013-08-02</date>
+	<version>
+		<release req="required" type="string">1.0.5</release>
+		<api req="required" type="string">1.0.0</api>
+	</version>
+	<stability>
+		<release req="required" type="string">stable</release>
+		<api req="required" type="string">stable</api>
+	</stability>
+	<license req="required" type="string">The BSD 3-Clause License</license>
+	<notes req="required" type="string">http://github.com/sebastianbergmann/php-timer/blob/master/README.markdown</notes>
+	
+	<required>
+		<php>
+			<min req="required" type="string">5.3.3</min>
+		</php>
+		<pearinstaller>
+			<min req="required" type="string">1.9.2</min>
+		</pearinstaller>
+	</required>
+	
+	
+</package>

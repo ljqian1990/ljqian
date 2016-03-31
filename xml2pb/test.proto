@@ -1,0 +1,52 @@
+
+	message package
+	{
+		required string name = 1;	//PHP_Timer
+		required string channel = 2;	//pear.phpunit.de
+		required string summary = 3;	//Utility class for timing
+		required string description = 4;	//Utility class for timing
+
+		message lead
+		{
+			required string name = 1;	//Sebastian Bergmann
+			required string user = 2;	//sb
+			required string email = 3;	//sb@sebastian-bergmann.de
+			required string active = 4;	//yes
+		}
+
+		required string date = 5;	//2013-08-02
+
+		message version
+		{
+			required string release = 1;	//1.0.5
+			required string api = 2;	//1.0.0
+		}
+
+
+		message stability
+		{
+			required string release = 1;	//stable
+			required string api = 2;	//stable
+		}
+
+		required string license = 6;	//The BSD 3-Clause License
+		required string notes = 7;	//http://github.com/sebastianbergmann/php-timer/blob/master/README.markdown
+
+		message required
+		{
+
+			message php
+			{
+				required string min = 1;	//5.3.3
+			}
+
+
+			message pearinstaller
+			{
+				required string min = 1;	//1.9.2
+			}
+
+		}
+
+	}
+

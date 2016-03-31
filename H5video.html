@@ -1,0 +1,25 @@
+<video autoplay style="width: 100%; height: 100%;"></video>
+<script>
+navigator.getUMedia = navigator.getUserMedia ||
+navigator.webkitGetUserMedia ||
+navigator.mozGetUserMedia;
+
+if (navigator.getUMedia) {
+	navigator.getUMedia(
+		{ audio: true, video: true },
+		function(stream) {
+			var video = document.querySelector('video');
+			video.src = window.URL.createObjectURL(stream);
+			video.onloadedmetadata = function(e) {
+				video.play();
+			};
+		},
+		function(err) {
+			console.log("The following error occured: " + err.name);
+		}
+	);
+} else {
+	console.log("getUserMedia not supported");
+}
+
+</script>

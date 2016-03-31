@@ -1,0 +1,47 @@
+
+message package
+{
+	required string name;        
+    required string channel;
+	required string summary;
+	required string description;
+	
+	message lead
+	{
+		required string name;
+		required string user
+		required string email
+		required string active
+	}
+	
+	required string date;
+	
+    message version
+    {
+    	required string release;
+    	required string api;
+    }
+                
+               
+	message stability
+	{
+		required string release;
+		required string api;
+	}
+
+	required string license;
+	required string notes;
+    
+    message required
+    {
+    	message php
+    	{
+    		required string min;
+    	}
+    	
+    	message pearinstaller
+    	{
+    		required string min;
+    	}
+    }
+}

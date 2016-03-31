@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<title>echarts图形插件使用-demo </title>
+</head>
+<body>
+   <div id="main" style="height:600px;width:950px;float:left"></div>
+   <div id="displaytext" style="height:200px;width:200px;border:2px solid red;float:left" ></div>
+   <script src="./build/dist/echarts.js"></script>
+   <script type="text/javascript">
+        require.config({
+            paths: {
+                echarts: './build/dist'
+            }
+        });
+   </script>
+   <script type="text/javascript">
+       require(
+            [
+                'echarts',
+                'echarts/chart/map'   // 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表
+            ],
+
+            function (ec) {
+                var myChart = ec.init(document.getElementById('main'));
+                
+                var option = {
+                    tooltip: {
+                        trigger: 'item',
+                        position: function (p) {
+                            // 位置回调
+                            return [p[0] + 0, p[1] - 30];
+                        }
+                    },
+                    dataRange: {
+                        //splitList自定义分割方式，支持不等距分割。
+                        splitList: [
+												{ start: 0, end: 75, label: '0-75', color: 'lightgreen' },
+												{ start: 75, end: 125, label: '75-125', color: 'lightgreen' },
+												{ start: 125, end: 175, label: '125-175', color: 'blue' },
+												{ start: 175, end: 225, label: '175-225', color: 'purple' },
+												{ start: 225, end: 300, label: '225-300', color: 'orange' },
+												{ start: 300, end: 800, label: '300-800', color: 'red' }
+											],
+                        selectedMode: false	//数据范围的联动效果失效
+                    },
+                    roamController: {
+                        show: true,
+                        x: 'right',
+                        mapTypeControl: {
+                            'china': true
+                        }
+                    },
+                    series: [
+							        {
+							            name: 'pm2.5',
+							            type: 'map',
+							            mapType: 'china',
+							            hoverable: false,
+							            clickable: false,
+							            selectedMode: false,
+							            itemStyle: {
+							                normal: { label: { show: true} },
+							                emphasis: { label: { show: false} }
+							            },
+							            roam: true, //可缩放
+							            data: [],
+							            markPoint: {
+							                clickable: true,
+							                symbolSize: 5,       // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
+							                itemStyle: {
+							                    normal: {
+							                        borderColor: '#eeeeee',
+							                        borderWidth: 1,            // 标注边线线宽，单位px，默认为1
+							                        label: { show: false }
+							                    },
+							                    emphasis: {
+							                        borderColor: '#1e90ff',
+							                        borderWidth: 5,
+							                        label: { show: false }
+							                    }
+							                },
+							                data: [
+//                                                { name: "乌鲁木齐黑山头(51462)", value: "100" },
+//                                                { name: "(50956)", value: "300" }
+
+							                ]
+							            },
+							            geoCoord: {   }
+							        }
+							    ]
+							}
+                
+                option = addData(option);
+							
+                myChart.setOption(option);
+
+            }
+        );
+                
+	function addData(option){
+		var stationInfoStr = "乌鲁木齐黑山头(51462),87.55,43.85,2.00|兰州(52889),103.88,36.05,2.00|呼和浩特(53466),111.70,40.75,2.00|大同(53487),113.33,40.10,2.00|自动新增台站(53578),0.00,0.00,1.00|银川(53614),106.20,38.47,2.00|榆林(53647),109.20,38.43,2.00|太原(53677),112.48,37.93,2.00|石家庄(53698),114.42,38.03,2.00|自动新增台站(53868),0.00,0.00,2.00|自动新增台站(53976),0.00,0.00,1.00|长春市(54161),125.22,43.90,2.00|阜新(54237),121.45,42.04,2.00|阜新(54237),121.45,42.04,2.00|铁岭(54249),123.42,42.14,2.00|朝阳(54324),120.26,41.33,2.00|锦州(54337),121.07,41.08,2.00|盘山(54338),122.03,41.07,2.00|鞍山(54339),123.00,41.05,2.00|本溪(54346),123.47,41.19,2.00|辽阳(54347),123.11,41.15,2.00|抚顺(54351),123.95,41.88,2.00|连山区(54453),120.51,40.42,2.00|营口(54471),122.10,40.40,2.00|固城(54500),115.80,39.13,2.00|大连金州(54568),121.75,39.05,2.00|济南(54823),117.05,36.60,2.00|贡嘎(55589),90.98,29.30,2.00|拉萨(55591),91.13,29.67,2.00|成都(56294),104.04,30.65,2.00|香格里拉(56449),99.73,28.02,2.00|自动新增台站(56492),0.00,0.00,2.00|昆明(56778),102.65,25.00,2.00|郑州(57083),113.68,34.78,2.00|西安(57131),108.97,34.43,2.00|荆门(57377),112.22,30.98,2.00|自动新增台站(57461),0.00,0.00,1.00|重庆(57516),106.47,29.58,2.00|桂林(57957),110.30,25.32,2.00|东滩(58363),121.80,31.51,2.00|庐山(58506),115.99,29.57,2.00|南昌(58606),115.92,28.60,2.00|福州(58940),119.33,26.08,2.00|广州国家基本气象观测站(萝岗）(59287),113.35,23.22,2.00|东莞气象局观测站(59289),113.73,22.97,2.00|番禺(59481),113.35,23.00,2.00|深圳市局大气成分站(59493),114.00,22.53,2.00|海口(59758),110.42,20.00,2.00|西沙(59981),112.20,16.50,2.00|番禺气象局观测站(G1092),113.32,22.93,2.00|海珠(G3101),113.33,23.08,2.00|广州塔454m(G3408),113.32,23.10,2.00|区局楼顶(Y5068),87.63,43.78,2.00|常德(Z9736),111.71,29.17,2.00";
+	    var stationArray = new Array();
+	    stationArray = stationInfoStr.split('|');
+		if (stationArray.length != "") {
+		    var jsonStr = "";
+		    var geoCoord = new Object();
+		    
+		    for (var i = 0; i < stationArray.length; i++) {
+		    	var station = new Array();
+		    	station = stationArray[i].split(",");
+		    	var stationName = station[0];
+		    	var stationLon = parseFloat(station[1]);
+		    	var stationLat = parseFloat(station[2]);
+		    	var itemValue = parseInt(station[3]);
+		        
+		        var mapData = new Object();
+		        mapData.name = stationName;
+		        mapData.value = itemValue;
+		        option.series[0].markPoint.data.push(mapData);		        		      	
+		        
+		        //将字符串转换成json字符串		        
+		        if (stationArray.length == 1) {
+		            jsonStr += '{"' + stationName + '":[' + stationLon + ', ' + stationLat + ']}';
+		        } else {
+		            if (i == 0) {
+		                jsonStr += '{"' + stationName + '":[' + stationLon + ', ' + stationLat + '],';
+		            } else if (i == stationArray.length - 1) {
+		                jsonStr += '"' + stationName + '":[' + stationLon + ', ' + stationLat + ']}';
+		            } else {
+		                jsonStr += '"' + stationName + '":[' + stationLon + ', ' + stationLat + '],';
+		            }
+		        }		        
+		    }
+		    
+		    
+		    
+		    geoCoord = JSON.parse(jsonStr);
+		    
+		    
+		    //var geoCoord = eval(eval('(' + jsonStr + ')')); //转换成json对象
+		    option.series[0].geoCoord = geoCoord;
+		}
+		
+		return option;
+	} 
+	 </script>
+</body>
+
+</html>
