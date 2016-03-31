@@ -21,4 +21,4 @@ class Persion
 
 $persion = new Persion();
 echo $persion->showName();
-echo $persion->showNameAgain();
+// echo $persion->showNameAgain();
