@@ -1,17 +1,17 @@
 <?php
 class ConnectionMySQL{
-    //Ö÷»ú
+    //ï¿½ï¿½ï¿½ï¿½
     private $host="localhost";
-    //Êý¾Ý¿âµÄusername
+    //ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½username
     private $name="root";
-    //Êý¾Ý¿âµÄpassword
+    //ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½password
     private $pass="";
-    //Êý¾Ý¿âÃû³Æ
+    //ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
     private $table="test";
-    //±àÂëÐÎÊ½
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
     private $ut="utf8";
 
-    //¹¹Ôìº¯Êý
+    //ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½
     function __construct($ut=''){
     	if(!empty($ut)){
     		$this->ut = $ut;
@@ -20,10 +20,10 @@ class ConnectionMySQL{
 
     }
 
-    //Êý¾Ý¿âµÄÁ´½Ó
+    //ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     function connect(){
-        $link = mysql_connect($this->host,$this->name,$this->pass) or die ($this->error());
-        mysql_select_db($this->table,$link) or die("Ã»¸ÃÊý¾Ý¿â£º".$this->table);
+        $link = mysql_connect($this->host,$this->name,$this->pass) or die ($this->error());        
+        mysql_select_db($this->table,$link) or die("Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿â£º".$this->table);
         mysql_query("SET NAMES '$this->ut'");
     }
 
@@ -73,20 +73,20 @@ class ConnectionMySQL{
         return mysql_close();
     }
 
-    //Ïò$table±íÖÐ²åÈëÖµ
+    //ï¿½ï¿½$tableï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½Öµ
     function fn_insert($table,$name,$value){
         $this->query("insert into $table ($name) value ($value)");
     }
-    //¸ù¾Ý$idÖµÉ¾³ý±í$tableÖÐµÄÒ»Ìõ¼ÇÂ¼
+    //ï¿½ï¿½ï¿½ï¿½$idÖµÉ¾ï¿½ï¿½ï¿½ï¿½$tableï¿½Ðµï¿½Ò»ï¿½ï¿½ï¿½ï¿½Â¼
     function fn_delete($table,$id,$value){
         $this->query("delete from $table where $id=$value");
-        echo "idÎª". $id." µÄ¼ÇÂ¼±»³É¹¦É¾³ý!";
+        echo "idÎª". $id." ï¿½Ä¼ï¿½Â¼ï¿½ï¿½ï¿½É¹ï¿½É¾ï¿½ï¿½!";
     }
 }
 
-// $db =  new ConnectionMySQL();
+$db =  new ConnectionMySQL();
 
-// $db->fn_insert('test','id,name,sex',"'','hongtenzone','M'");
+$db->fn_insert('test','id,name,sex',"'','hongtenzone','M'");
 // $db->fn_delete('test', 'id', 2);
 
 ?>

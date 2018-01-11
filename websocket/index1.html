@@ -1,0 +1,45 @@
+<script src="../jquery/jquery-1.7.2.min.js"></script>
+<script>
+// http://javascript.ruanyifeng.com/htmlapi/websocket.html
+if(window.WebSocket != undefined) {
+	// WebSocket����
+	var connection = new WebSocket('ws://192.168.39.4:41001');
+	
+	connection.onopen = wsOpen;
+	function wsOpen (event) {		
+		console.log('Connected to: ' + event.currentTarget.url);
+	}
+	
+	connection.onclose = wsClose;
+	function wsClose () {
+		console.log("Closed");
+	}
+
+	function send(msg){
+		msg = $("#msg").val();
+		connection.send('broadcast;'+msg);
+	}
+    
+    function sendcount()
+    {
+        var msg = 'count;111';
+        connection.send(msg);
+    }
+	
+	connection.onmessage = wsMessage;
+	function wsMessage (event) {
+		console.log(event.data);
+		$("#show").append(event.data+"<br>");
+	}
+	
+	connection.onerror = wsError;
+	function wsError(event) {
+		console.log("Error: " + event.data);
+	}
+	//connection.close();
+}
+</script>
+<input type="text" id="msg" />
+<button onclick="send('1111')">11111</button>
+<button onclick="sendcount('1111')">COUNT</button>
+<p id="show"></p>

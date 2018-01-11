@@ -1,0 +1,8 @@
+trie_filter.lo: /soft/php-ext-trie-filter/trie_filter.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/soft/php-ext-trie-filter $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /soft/php-ext-trie-filter/trie_filter.c -o trie_filter.lo 
+$(phplibdir)/trie_filter.la: ./trie_filter.la
+	$(LIBTOOL) --mode=install cp ./trie_filter.la $(phplibdir)
+
+./trie_filter.la: $(shared_objects_trie_filter) $(TRIE_FILTER_SHARED_DEPENDENCIES)
+	$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_trie_filter) $(TRIE_FILTER_SHARED_LIBADD)
+

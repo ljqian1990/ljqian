@@ -1,0 +1,5 @@
+/vendor/
+/.idea/
+*.lock
+*.log
+/client/uploads/

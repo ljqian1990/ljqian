@@ -2,26 +2,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>demo</title>
 <script src="jquery/jquery-1.7.2.min.js"></script>
 <script>
 $(document).ready(function(){
 	$.ajax({
 		type: "POST",
-		url:"https://demo.ljqian.me/jsonp.php?callback=?",
+		url:"http://common.dev.ztgame.com:9451/oneyear/action.php?a=saveMessage&callback=?",
 		dataType: "jsonp",
-		data:{word:'hello'},
+		data:{gameid:'test', phone:'18914923025', wishes:'lalala'},
 		jsonp: "callback",
 		success: function(data){
-			console.log(data);
+			if (data.ret == 1) {
+				//成功
+			} else {
+				//失败
+				alert(data.msg);
+			}
 		},
 		error: function(jqXHR){
 			alert(jqXHR.status);
 		}
 	});
-	
-	//var data = '{"errorCode":"","data":[{"code":"US","enName":"America","chName":"美国","zone":"com","selectable":true},{"code":"AR","enName":"Argentina","chName":"阿根廷","zone":"com","selectable":true},{"code":"AU","enName":"Australia","chName":"澳大利亚","zone":"com","selectable":true},{"code":"BE","enName":"Belgium","chName":"比利时","zone":"com","selectable":true},{"code":"BR","enName":"Brazil","chName":"巴西","zone":"com","selectable":true},{"code":"CA","enName":"Canada","chName":"加拿大","zone":"com","selectable":true},{"code":"CL","enName":"Chile","chName":"智力","zone":"com","selectable":true},{"code":"CN","enName":"China","chName":"中国大陆","zone":"cn","selectable":false},{"code":"CO","enName":"Colombia","chName":"哥伦比亚","zone":"com","selectable":true},{"code":"UK","enName":"England","chName":"英国","zone":"com","selectable":true},{"code":"FR","enName":"French","chName":"法国","zone":"com","selectable":true},{"code":"DE","enName":"Germany","chName":"德国","zone":"com","selectable":true},{"code":"GR","enName":"Greece","chName":"希腊","zone":"com","selectable":true},{"code":"HK","enName":"Hong Kong","chName":"香港","zone":"com","selectable":true},{"code":"HU","enName":"Hungary","chName":"匈牙利","zone":"com","selectable":true},{"code":"ID","enName":"Indonesia","chName":"印度尼西亚","zone":"com","selectable":true},{"code":"IL","enName":"Israel","chName":"以色列","zone":"com","selectable":true},{"code":"IT","enName":"Italy","chName":"意大利","zone":"com","selectable":true},{"code":"MY","enName":"Malaysia","chName":"马来西亚","zone":"com","selectable":true},{"code":"MX","enName":"Mexico","chName":"墨西哥","zone":"com","selectable":true},{"code":"NL","enName":"Netherlands","chName":"荷兰","zone":"com","selectable":true},{"code":"OTH","enName":"Other","chName":"其他","zone":"com","selectable":true},{"code":"PH","enName":"Philippines","chName":"菲律宾","zone":"com","selectable":true},{"code":"PL","enName":"Poland","chName":"波兰","zone":"com","selectable":true},{"code":"RO","enName":"Romania","chName":"罗马尼亚","zone":"com","selectable":true},{"code":"BY","enName":"Russia","chName":"俄罗斯","zone":"com","selectable":true},{"code":"SG","enName":"Singapore","chName":"新加坡","zone":"com","selectable":true},{"code":"SI","enName":"Slovene","chName":"斯洛文尼亚","zone":"com","selectable":true},{"code":"ES","enName":"Spain","chName":"西班牙","zone":"com","selectable":true},{"code":"TH","enName":"Thailand","chName":"泰国","zone":"com","selectable":true},{"code":"AE","enName":"United Arab Emirates","chName":"阿联酋(迪拜)","zone":"com","selectable":true},{"code":"VN","enName":"Vietnam","chName":"越南","zone":"com","selectable":true}]}';
-	//console.log(JSON.parse(data));
 });
 </script>
 </head>

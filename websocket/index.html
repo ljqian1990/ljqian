@@ -1,0 +1,54 @@
+<script src="../jquery/jquery-1.7.2.min.js"></script>
+<script>
+// http://javascript.ruanyifeng.com/htmlapi/websocket.html
+if(window.WebSocket != undefined) {
+	// WebSocket����
+	var connection = new WebSocket('ws://101.226.182.36:41010?userstr=iny7Hn+TWsisBPHZc3xLIyuLgrvpNajPmxBftO5A3iMJ1fBWqHGoI2JcfgEcPE+lhCxYbNgzBgKdPpBtaUrt+mahAFsxL1g78kgryTaB2PASKPtmCyvDzvTDpsadIPNC4r5f60K3TSHN+kqEy6+GrSM0wrbUNNve/U+lny+xpp3D2ML/vFbc2h3aQUlAnwXq');
+    //var connection = new WebSocket('ws://192.168.39.4:41010?userstr=7EcwbeMTUFf/dhmRcL+iiWQ+ip3iWcGa3c536jvjS5kNiiaYt8IzQ5BYyuOZHMbaQOaAdRUiKlOndpyjXXa0e2KH2ajxru5zlKLPzE8qqg6VXezIZz2LKL87va9iCnbrlimdsi7q1oxQhJM1uhNvGOXarrPblmmw0EyAQSozK4sJJHiQm3imCX9SJuYXy4cJ62P6M/I86skNt1bwA/+XUe+j8F7sRJwR9fOBrrLZkqeSv3Ih8dLyexXAuHmtesvEqQzKCtyOCG5w5oLgIfqM9Q==');
+    
+	
+	connection.onopen = wsOpen;
+	function wsOpen (event) {		
+		console.log('Connected to: ' + event.currentTarget.url);
+	}
+	
+	connection.onclose = wsClose;
+	function wsClose () {
+		console.log("Closed");
+	}
+
+	function send(msg){
+		msg = $("#msg").val();
+		connection.send('broadcast;'+msg);
+	}
+    
+    function sendcount()
+    {
+        var msg = 'count;111';
+        connection.send(msg);
+    }
+    
+    function sendbuffer()
+    {
+        var msg = 'buffer;111';
+        connection.send(msg);
+    }
+	
+	connection.onmessage = wsMessage;
+	function wsMessage (event) {
+		console.log(event.data);
+		$("#show").append(event.data+"<br>");
+	}
+	
+	connection.onerror = wsError;
+	function wsError(event) {
+		console.log("Error: " + event.data);
+	}
+	//connection.close();
+}
+</script>
+<input type="text" id="msg" />
+<button onclick="send('1111')">11111</button>
+<button onclick="sendcount('1111')">COUNT</button>
+<button onclick="sendbuffer('1111')">buffer</button>
+<p id="show"></p>

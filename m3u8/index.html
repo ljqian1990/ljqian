@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ckplayer简单调用演示</title>
+
+</head>
+
+<body>
+<div id="a1"></div>
+<div id="a2"></div>
+<div id="a3"></div>
+<div id="a4"></div>
+<div id="a5"></div>
+<div id="a6"></div>
+
+<script type="text/javascript" src="ckplayer/ckplayer.js" charset="utf-8"></script>
+<script type="text/javascript">
+	var quanmin = 'http://gd2huqn8vp2gkre4xbu.exp.bcelive.com/lss-gmys075mp2ccbsdw/live.m3u8';
+	var shihou = 'http://shihoutv.hlslive.ks-cdn.com/live/10049_prod/index.m3u8';
+	var huya = 'http://hls.huya.com/75452579/75452579/yylive';
+	var douyu = 'http://act.jl.web.ztgame.com/allstarmatch/action.php?a=douyu';
+	var chushou = 'http://act.jl.web.ztgame.com/allstarmatch/action.php?a=chushou';
+	var zhanqi = 'https://wshls.cdn.zhanqi.tv/zqlive/181361_u07it/playlist.m3u8';
+	
+	showPlayer(quanmin, 'a1');
+	showPlayer(shihou, 'a2');
+	showPlayer(huya, 'a3');
+	showPlayer(douyu, 'a4');
+	showPlayer(chushou, 'a5');
+	showPlayer(zhanqi, 'a6');
+	
+	function showPlayer(src, id){
+	     //player
+	   var flashvars={
+	        f : 'ckplayer/m3u8.swf',
+	        a : src,
+	        c : 0,
+	        s:4,
+	        lv:0//注意，如果是直播，需设置lv:1
+	    };
+	    var params={bgcolor:'#FFF',allowFullScreen:true,allowScriptAccess:'always',wmode:'transparent'};
+	    var video=[src];
+	    CKobject.embed('ckplayer/ckplayer.swf',id ,'ck-video','100%','100%',false, flashvars ,video, params);
+	 
+	}
+  </script>
+</body>
+</html>
