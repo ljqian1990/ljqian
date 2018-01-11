@@ -1,0 +1,27 @@
+<script src="../jquery/jquery-1.7.2.min.js"></script>
+<script>
+/*
+$.ajax({
+	url:'http://w1.dev.ztgame.com/jigsaw/action.php',
+	type:"post",
+	data:{c:'user',f:'login',username:'qianlijia',password:'qljQLJ1709'},	
+	success:function(ret) {
+		console.log(ret);
+		
+
+	}
+});
+*/
+
+$.ajax({
+	url:'http://w1.dev.ztgame.com/jigsaw/action.php?c=user&f=checkstatus&callback=reqwest_1505902826221',
+	type:"get",			
+	dataType:'jsonp',
+	success:function(ret) {
+		console.log(ret);
+		
+		
+	}
+});		
+
+</script>

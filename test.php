@@ -1,47 +1,22 @@
-<?php 
-class requireClass
-{
-	private $siteid;
-	
-	public function __construct()
-	{
-		$siteid = $_REQUEST['siteid'];
-		$this->setSiteid($siteid);
-	}
-	
-	public function needChangeSiteid()
-	{
-		$siteid = $_REQUEST['siteid'];
-		$this->setSiteid($siteid);
-	}
-	
-	public function pprint()
-	{
-		return $this->getSiteid()."<br>";
-	}
-	
-	private function setSiteid($siteid)
-	{
-		$this->siteid = $siteid;
-	}
-	
-	private function getSiteid()
-	{
-		return $this->siteid;
-	}
-}
-
-
-$_REQUEST['siteid'] = 1;
-$require = new requireClass();
-echo $require->pprint();
-
-$siteid_tmp = $_REQUEST['siteid'];
-$_REQUEST['siteid'] = 2;
-$require->needChangeSiteid();
-echo $require->pprint();
-$_REQUEST['siteid'] = $siteid_tmp;
-
-$require = new requireClass();
-echo $require->pprint();
-
+<script>
+function CloseWebPage() {     
+    if (navigator.userAgent.indexOf("MSIE") > 0) {     
+        if (navigator.userAgent.indexOf("MSIE 6.0") > 0) {     
+            window.opener = null; window.close();     
+        }     
+        else {     
+            window.open('', '_top'); window.top.close();     
+        }     
+    }     
+    else if (navigator.userAgent.indexOf("Firefox") > 0) {     
+        window.location.href = 'about:blank '; //火狐默认状态非window.open的页面window.close是无效的    
+        //window.history.go(-2);     
+    }     
+    else {     
+        window.opener = null;      
+        window.open('', '_self', '');     
+        window.close();     
+    }     
+}     
+CloseWebPage();
+</script>

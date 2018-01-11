@@ -1,0 +1,41 @@
+<script src="js/jquery-1.11.1.min.js"></script>
+<script>
+function getSMCD()
+{
+$.ajax({
+	url:"http://sapi.ztgame.com/yuyue/smcd",
+	data:{cid:1, phone_number:$("#phone_number").val(),  picode:$("#picode").val()},
+	type:"get",
+	dataType:"jsonp",
+	jsonp:"callback",
+	success:function(data)
+	{
+		console.log(data);
+	}
+});
+}
+
+function savedata()
+{
+	$.ajax({
+		url:"http://sapi.ztgame.com/yuyue/datasave",
+		data:{cid:1, gametype:5078, phone_number:$("#phone_number").val(), smcd:$("#smcd").val(), extra_data:{name:$("#username").val(), qiuqiuhao:$("#qiuqiuhao").val(), changci:$("#changci").val()}},
+		type:"post",
+		dataType:"jsonp",
+		jsonp:"callback",
+		success:function(data)
+		{
+			console.log(data);
+		}
+	});
+}
+</script>
+手机号：<input type="text" name="phonenumber" id="phone_number" /><br>
+验证码：<img src="http://sapi.ztgame.com/yuyue/vcimg" />
+验证码填写：<input type="text" name="vcode" id="picode" /><br>
+<input type="button" onclick="getSMCD()" value="获取短信验证码"><br>
+手机验证码填写：<input type="text" id="smcd" /><br>
+用户名：<input type="text" id="username" /><br>
+用户球球号：<input type="text" id="qiuqiuhao" /><br>
+参与的场次数：<input type="text" id="changci" /><br>
+<input type="button" onclick="savedata()" value="提交数据">

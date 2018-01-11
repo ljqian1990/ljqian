@@ -1,0 +1,4 @@
+RewriteEngine On  RewriteCond % !^$
+RewriteRule m/detail/(.*) m/detail.html?id={$1} [L,NC]
+RewriteRule detail/(.*) detail.html?id={$1} [L,NC]
+RewriteRule action/(.*) action.php?a=$1 [L,NC]

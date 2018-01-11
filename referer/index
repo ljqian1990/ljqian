@@ -1,0 +1,5 @@
+<script>
+var referer = document.referrer;
+console.log(referer);
+alert(referer);
+</script>
