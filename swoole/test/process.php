@@ -18,7 +18,7 @@
 
     public function run(){
         for ($i=0; $i < $this->max_precess; $i++) {
-            $this->CreateProcess();
+            $this->CreateProcess($i);
         }
     }
 
