@@ -335,17 +335,3 @@ class Client
         return $this->timeout;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
