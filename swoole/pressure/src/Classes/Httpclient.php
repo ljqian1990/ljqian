@@ -1,6 +1,7 @@
 <?php
 namespace Pressure\Classes;
 
+use Pressure\Callback\Base as CallbackBase;
 use Pressure\Classes\Client as ClientBase;
 use Closure;
 use swoole_http_client;
@@ -13,9 +14,9 @@ class Httpclient extends ClientBase
     private $method = 'GET';
     private $params = [];    
 
-    public function __construct(Parse $oParse)
+    public function __construct(Parse $oParse, CallbackBase $oCallback)
     {
-        parent::__construct($oParse);
+        parent::__construct($oParse, $oCallback);
         
         $this->setHost($oParse->getHost());
         $this->setUri($oParse->getUri());
@@ -25,7 +26,7 @@ class Httpclient extends ClientBase
         return $this;
     }
 
-    public function send(Closure $callback)
+    public function send()
     {
         $this->cli = new swoole_http_client($this->getIp(), $this->getPort());
         
@@ -42,23 +43,18 @@ class Httpclient extends ClientBase
         $uri = $this->getUri();
         $method = $this->getMethod();
         if ($method == 'GET') {
-            $this->cli->get($uri, function(swoole_http_client $cli) use ($callback){
-                if ($cli->statusCode == 200) {
-                    echo "OK\r\n";                    
-                } else {
-                    echo "Error\r\n";
-                }
-                $callback($cli);
+            $this->cli->get($uri, function(swoole_http_client $cli) {                
+                $this->getOcallback()->callback($this, $cli);
                 $cli->close();
             });
         } elseif ($method == 'POST') {
-            $this->cli->post($uri, $this->getParams(), function (swoole_http_client $cli) use ($callback) {
+            $this->cli->post($uri, $this->getParams(), function (swoole_http_client $cli) {
                 if ($cli->statusCode == 200) {
                     echo "OK\r\n";
                 } else {
                     echo "Error\r\n";
                 }
-                $callback($cli);
+                $this->getOcallback()->callback($cli);
                 $cli->close();
             });
         }

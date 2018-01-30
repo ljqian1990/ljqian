@@ -1,0 +1,98 @@
+<?php
+(new class{
+    public $mpid=0;
+    public $works=[];
+    public $max_precess=1;
+    public $new_index=0;
+
+    public function __construct(){
+        try {
+            swoole_set_process_name(sprintf('php-ps:%s', 'master'));
+            $this->mpid = posix_getpid();
+            $this->run();
+            $this->processWait();
+        }catch (\Exception $e){
+            die('ALL ERROR: '.$e->getMessage());
+        }
+    }
+
+    public function run(){
+        for ($i=0; $i < $this->max_precess; $i++) {
+            $this->CreateProcess($i);
+        }
+    }
+
+    public function CreateProcess($index=null){
+        $process = new swoole_process(function(swoole_process $worker)use($index){
+            if(is_null($index)){
+                $index=$this->new_index;
+                $this->new_index++;
+            }
+            swoole_set_process_name(sprintf('php-ps:%s',$index));
+            
+            while (true) {
+                $queue_id = 1; // 定义一个队列id
+                $queue = msg_get_queue($queue_id);
+                if (! $queue) {
+                    echo 'false';exit;
+                }
+                $queue_info = msg_stat_queue($queue);
+                
+                //print_r($queue_info);
+                
+                msg_receive($queue, 0, $msg_typei, 1024, $msg, true, null, $error);
+                
+                echo $msg."\r\n";
+                
+                $ret = unserialize($msg);
+                
+                
+                msg_send($queue, 1, serialize(array('a' => $ret['a'] . '_reply','name' => $ret['name'] . '_reply', 'text'=>$ret['text'].'_reply')));
+                
+                unset($ret, $queue_id, $queue, $queue_info, $msg);
+                
+                //echo "msg: {$index}\n";
+            }
+            //for ($j = 0; $j < 1; $j++) {
+            //    $this->checkMpid($worker);
+                //echo "msg: {$j}\n";
+                
+            //}
+        }, false, 1);
+        $pid=$process->start();
+        $this->works[$index]=$pid;
+        return $pid;
+    }
+    public function checkMpid(&$worker){
+        if(!swoole_process::kill($this->mpid,0)){
+            $worker->exit();
+            // �����ʾ,ʵ���ǿ�������.��Ҫд����־��
+            echo "Master process exited, I [{$worker['pid']}] also quit\n";
+        }
+    }
+
+    public function rebootProcess($ret){
+        $pid=$ret['pid'];
+        $index=array_search($pid, $this->works);
+        if($index!==false){
+            $index=intval($index);
+            $new_pid=$this->CreateProcess($index);
+            //echo "rebootProcess: {$index}={$new_pid} Done\n";
+            return;
+        }
+        throw new \Exception('rebootProcess Error: no pid');
+    }
+
+    public function processWait(){
+        while(1) {
+            if(count($this->works)){
+                $ret = swoole_process::wait();
+                if ($ret) {
+                    $this->rebootProcess($ret);
+                }
+            }else{
+                break;
+            }
+        }
+    }
+});

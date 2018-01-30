@@ -9,10 +9,11 @@ class Parse
     private $oSchema = null;
     
     // 公用的字段
-    private $schema = '';
+    private $schema = null;
     private $ip = '';
     private $port = 0;
-    
+    private $callback = null;
+        
     // 压测http需要的字段
     private $host = '';
     private $uri = '';
@@ -69,6 +70,7 @@ class Parse
     {
         $this->setIp($this->getArgv('i'));
         $this->setPort(intval($this->getArgv('p', 0)));
+        $this->setCallback($this->getArgv('cb', $this->getSchema()));
         
         if (! ($this->getIp() && $this->getPort())) {
             throw new Exception('-i -p 参数为必填参数');
@@ -228,6 +230,11 @@ class Parse
         $this->oSchema = $oSchema;
     }
     
+    private function setCallback(String $callback)
+    {
+        $this->callback = $callback;
+    }
+    
     public function getSchema()
     {
         return $this->schema;
@@ -296,6 +303,11 @@ class Parse
     public function getIsperpetual()
     {
         return $this->isperpetual;
+    }
+    
+    public function getCallback()
+    {
+        return $this->callback;
     }
     
     private function getArgvArr()

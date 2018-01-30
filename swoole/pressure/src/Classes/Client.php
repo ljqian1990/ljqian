@@ -2,12 +2,16 @@
 namespace Pressure\Classes;
 
 use Closure;
+use Pressure\Callback\Base as CallbackBase;
 use Pressure\Interfaces\Client as ClientInterface;
+use Swoole\IFace\Protocol;
 
 abstract class Client implements ClientInterface
 {
 
     protected $cli = null;
+    
+    protected $oCallback = null;
 
     protected $ip = '';
 
@@ -15,14 +19,16 @@ abstract class Client implements ClientInterface
 
     protected $timeout = 1;
 
-    public function __construct(Parse $oParse)
+    public function __construct(Parse $oParse, CallbackBase $oCallback)
     {
         $this->setIp($oParse->getIp());
         $this->setPort($oParse->getPort());
+        
+        $this->setOcallback($oCallback);
         return $this;
     }
 
-    abstract public function send(Closure $callback);
+    abstract public function send();
 
     protected function setIp(String $ip)
     {
@@ -39,6 +45,11 @@ abstract class Client implements ClientInterface
         $this->timeout = $timeout;
         return $this;
     }
+    
+    protected function setOcallback(CallbackBase $oCallback)
+    {
+        $this->oCallback = $oCallback;
+    }
 
     protected function getIp()
     {
@@ -53,5 +64,10 @@ abstract class Client implements ClientInterface
     protected function getTimeout()
     {
         return $this->timeout;
+    }
+    
+    protected function getOcallback()
+    {
+        return $this->oCallback;
     }
 }
