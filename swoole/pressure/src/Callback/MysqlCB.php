@@ -3,15 +3,15 @@ namespace Pressure\Callback;
 
 use Pressure\Clients\Client;
 
-class HttpCB extends Base
+class MysqlCB extends Base
 {
 
     public function callback(Client $client, $result)
     {
-        if ($result->statusCode == 200) {           
+        if ($result->errno == 0) {           
             echo "OK\r\n";
         } else {
-            echo "Error\r\n";
+            echo "connectted error.errno:{$db->connect_errno}, errmsg:{$db->connect_error}\r\n";            
         }
     }
 }

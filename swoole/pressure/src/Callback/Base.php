@@ -1,7 +1,7 @@
 <?php
 namespace Pressure\Callback;
 
-use Pressure\Classes\Client;
+use Pressure\Clients\Client;
 use Pressure\Interfaces\CallbackInterface;
 
 abstract class Base implements CallbackInterface

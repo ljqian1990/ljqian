@@ -1,8 +1,8 @@
 <?php
-namespace Pressure\Classes;
+namespace Pressure\Libraries;
 
 use Exception;
-use Pressure\Classes\Schema;
+use Pressure\Configs\Schema;
 
 class Parse
 {
@@ -26,11 +26,18 @@ class Parse
     private $key = '';
     private $value = '';
     
+    // 配置tcp需要用的字段
+    private $sendata = '';
+    
+    // 配置mysql需要用的字段
+    private $user = '';
+    private $charset = 'utf8';
+    private $sql = '';
+    
     // 配置process的字段
     private $processNum = 1;
     private $eachProcessExecTimes = 1;
     private $isperpetual = true;
-    
     
     private $argvArr = [];
     
@@ -133,12 +140,73 @@ class Parse
     private function redisHandler()
     {
         $this->setPassword($this->getArgv('pwd'));
-        $this->setDatabase(intval($this->getArgv('db', 0)));
+        $this->setDatabase($this->getArgv('db', ''));
         $this->setKey($this->getArgv('k'));
         $this->setValue($this->getArgv('v'));
         
         if (! ($this->getKey() && $this->getValue())) {
             throw new Exception('-k -v参数为必填参数');
+        }
+    }
+    
+    /**
+     * 压测tcp
+     * #php index.php -i "127.0.0.1" -p 9601 -sd "ljqian" -t 1 -c 1 -pe 0 -s "tcp"
+     * 
+     * 参数说明
+     * -sd  sendata 设置需要通过tcp发送的内容
+     */
+    private function tcpHandler()
+    {
+        $this->setSendata($this->getArgv('sd'));        
+    }
+    
+    /**
+     * 压测websocket
+     * #php index.php -i "127.0.0.1" -p 40100 -u "/" -sd "ljqian" -t 1 -c 1 -pe 0 -s "websocket"
+     *
+     * 参数说明
+     * -sd  sendata 设置需要通过tcp发送的内容
+     */
+    private function websocketHandler()
+    {
+        $this->setUri($this->getArgv('u'));
+        $this->setSendata($this->getArgv('sd'));
+    }
+    
+    /**
+     * 压测udp
+     * #php index.php -i "192.168.12.192" -p 20000 -sd "192.168.12.132" -t 1 -c 1 -pe 0 -s "udp"
+     *
+     * 参数说明
+     * -sd  sendata 设置需要通过tcp发送的内容
+     */
+    private function udpHandler()
+    {
+        $this->setSendata($this->getArgv('sd'));
+    }
+    
+    /**
+     * 压测mysql
+     * #php index.php -i "127.0.0.1" -p 3306 -u "root" -pwd "ljqian1990" -db "ip2region" -sql "select * from ip_list_995;" -t 1 -c 1 -pe 0 -s "mysql"
+     *
+     * 参数说明
+     * -u       user 用户名
+     * -pwd     password    密码
+     * -db      database    数据库
+     * -charset charset     数据库编码格式
+     * -sql     sql         需要执行的sql语句
+     */
+    private function mysqlHandler()
+    {
+        $this->setUser($this->getArgv('u'));
+        $this->setPassword($this->getArgv('pwd'));
+        $this->setDatabase($this->getArgv('db'));
+        $this->setCharset($this->getArgv('charset', 'utf8'));
+        $this->setSql($this->getArgv('sql'));
+        
+        if (! ($this->getUser() && $this->getDatabase() && $this->getSql())) {
+            throw new Exception('-u -db -sql参数为必填参数');
         }
     }
     
@@ -190,7 +258,7 @@ class Parse
         $this->password = $password;
     }
     
-    private function setDatabase(int $database)
+    private function setDatabase(String $database)
     {
         $this->database = $database;
     }
@@ -233,6 +301,26 @@ class Parse
     private function setCallback(String $callback)
     {
         $this->callback = $callback;
+    }
+    
+    private function setSendata(String $sendata)
+    {
+        $this->sendata = $sendata;
+    }
+    
+    private function setUser(String $user)
+    {
+        $this->user = $user;
+    }
+    
+    private function setCharset(String $charset)
+    {
+        $this->charset = $charset;
+    }
+    
+    private function setSql(String $sql)
+    {
+        $this->sql = $sql;
     }
     
     public function getSchema()
@@ -308,6 +396,26 @@ class Parse
     public function getCallback()
     {
         return $this->callback;
+    }
+    
+    public function getSendata()
+    {
+        return $this->sendata;
+    }
+    
+    public function getUser()
+    {
+        return $this->user;
+    }
+    
+    public function getCharset()
+    {
+        return $this->charset;
+    }
+    
+    public function getSql()
+    {
+        return $this->sql;
     }
     
     private function getArgvArr()

@@ -1,10 +1,10 @@
 <?php
-namespace Pressure\Classes;
+namespace Pressure\Clients;
 
 use Closure;
 use Pressure\Callback\Base as CallbackBase;
 use Pressure\Interfaces\Client as ClientInterface;
-use Swoole\IFace\Protocol;
+use Pressure\Libraries\Parse;
 
 abstract class Client implements ClientInterface
 {

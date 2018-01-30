@@ -1,9 +1,11 @@
 <?php
-namespace Pressure\Classes;
+namespace Pressure\Clients;
 
 use Pressure\Callback\Base as CallbackBase;
-use Pressure\Classes\Client as ClientBase;
+use Pressure\Clients\Client as ClientBase;
+use Pressure\Libraries\Parse;
 use Closure;
+use Exception;
 use swoole_http_client;
 
 class Httpclient extends ClientBase
@@ -32,7 +34,7 @@ class Httpclient extends ClientBase
         
         $host = $this->getHost();
         if (!empty($host)) {
-            $hostHeader = ['Host'=>$this->getHost()];      
+            $hostHeader = ['Host'=>$this->getHost()];
             $this->cli->setHeaders($hostHeader);
         }
         
@@ -48,13 +50,8 @@ class Httpclient extends ClientBase
                 $cli->close();
             });
         } elseif ($method == 'POST') {
-            $this->cli->post($uri, $this->getParams(), function (swoole_http_client $cli) {
-                if ($cli->statusCode == 200) {
-                    echo "OK\r\n";
-                } else {
-                    echo "Error\r\n";
-                }
-                $this->getOcallback()->callback($cli);
+            $this->cli->post($uri, $this->getParams(), function (swoole_http_client $cli) {                
+                $this->getOcallback()->callback($this, $cli);
                 $cli->close();
             });
         }
