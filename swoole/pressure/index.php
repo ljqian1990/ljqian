@@ -8,7 +8,9 @@ use Pressure\Classes\Schema;
 $oSchema = new Schema();
 $oParse = new Parse($argv, $oSchema);
 
-$client = (new ReflectionClass('Pressure\\Classes\\'. ucfirst($oParse->getSchema()) . 'client'))->newInstanceArgs([$oParse]);
+$callback = (new ReflectionClass('Pressure\\Callback\\'. ucfirst($oParse->getCallback()) . 'CB'))->newInstance();
+
+$client = (new ReflectionClass('Pressure\\Classes\\'. ucfirst($oParse->getSchema()) . 'client'))->newInstanceArgs([$oParse, $callback]);
 
 $process = new Process($client, $oParse);
 $process->start();

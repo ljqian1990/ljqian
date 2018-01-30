@@ -2,6 +2,7 @@
 namespace Pressure\Classes;
 
 use Pressure\Classes\Client;
+use Pressure\Callback\Base as CallbackBase;
 use swoole_process;
 
 class Process{
@@ -13,10 +14,10 @@ class Process{
     private $eachProcessExecTimes = 1;
     private $isperpetual = false;
     
-    private $client = null;    
+    private $client = null;
 
     public function __construct(Client $client, Parse $oParse){
-        $this->client = $client;
+        $this->client = $client;        
         
         $this->setProcessNum($oParse->getProcessNum());
         $this->setIsPerpetual($oParse->getIsperpetual());
@@ -53,17 +54,7 @@ class Process{
             for ($j = 0; $j < $eachProcessExecTimes; $j++) {
                 $this->checkMpid($worker);
                 
-                $this->client->send(function($cli){
-                    
-                });
-                
-//                 $this->client->send(function($cli){
-//                     if ($cli->statusCode == 200) {
-//                         echo "OK\r\n";
-//                     } else {
-//                         echo "Error\r\n";
-//                     }
-//                 });
+                $this->client->send();
             }
         }, false, 1);
         $pid=$process->start();

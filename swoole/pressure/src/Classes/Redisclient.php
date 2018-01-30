@@ -1,6 +1,7 @@
 <?php
 namespace Pressure\Classes;
 
+use Pressure\Callback\Base as CallbackBase;
 use Pressure\Classes\Client as ClientBase;
 use Closure;
 use swoole_redis;
@@ -16,9 +17,9 @@ class Redisclient extends ClientBase
 
     private $value = '';
 
-    public function __construct(Parse $oParse)
+    public function __construct(Parse $oParse, CallbackBase $oCallback)
     {
-        parent::__construct($oParse);
+        parent::__construct($oParse, CallbackBase $oCallback);
         
         $this->setPassword($oParse->getPassword());
         $this->setDatabase($oParse->getDatabase());
@@ -28,7 +29,7 @@ class Redisclient extends ClientBase
         return $this;
     }
 
-    public function send(Closure $callback)
+    public function send()
     {
         $options = [
             'password' => $this->getPassword(),
@@ -37,15 +38,11 @@ class Redisclient extends ClientBase
         ];
         
         $this->cli = new swoole_redis();
-        $this->cli->connect($this->getIp(), $this->getPort(), function (swoole_redis $client, $result) use($callback) {
-            $client->set($this->getKey(), $this->getValue(), function (swoole_redis $client, $result) use($callback) {                
-                $client->get($this->getKey(), function (swoole_redis $client, $result) use($callback) {                    
-                    if ($result == $this->getValue()) {
-                        echo "OK\r\n";
-                    } else {
-                        echo "Error\r\n";
-                    }
-                    $callback($client);
+        $this->cli->connect($this->getIp(), $this->getPort(), function (swoole_redis $client, $result) {
+            $client->set($this->getKey(), $this->getValue(), function (swoole_redis $client, $result) {                
+                $client->get($this->getKey(), function (swoole_redis $client, $result) {
+                    $client->result = $result;
+                    $this->getOcallback()->callback($this, $client);   
                     $client->close();
                 });
             });
