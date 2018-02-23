@@ -1,7 +1,7 @@
 <?php
 namespace Pressure\Callback;
 
-use Pressure\Classes\Client;
+use Pressure\Clients\Client;
 
 class NullCB extends Base
 {

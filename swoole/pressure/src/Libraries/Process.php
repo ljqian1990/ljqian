@@ -1,7 +1,7 @@
 <?php
-namespace Pressure\Classes;
+namespace Pressure\Libraries;
 
-use Pressure\Classes\Client;
+use Pressure\Clients\Client;
 use Pressure\Callback\Base as CallbackBase;
 use swoole_process;
 

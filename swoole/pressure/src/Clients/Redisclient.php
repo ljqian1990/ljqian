@@ -1,8 +1,9 @@
 <?php
-namespace Pressure\Classes;
+namespace Pressure\Clients;
 
 use Pressure\Callback\Base as CallbackBase;
-use Pressure\Classes\Client as ClientBase;
+use Pressure\Clients\Client as ClientBase;
+use Pressure\Libraries\Parse;
 use Closure;
 use swoole_redis;
 
@@ -19,7 +20,7 @@ class Redisclient extends ClientBase
 
     public function __construct(Parse $oParse, CallbackBase $oCallback)
     {
-        parent::__construct($oParse, CallbackBase $oCallback);
+        parent::__construct($oParse, $oCallback);
         
         $this->setPassword($oParse->getPassword());
         $this->setDatabase($oParse->getDatabase());
@@ -73,22 +74,22 @@ class Redisclient extends ClientBase
         return $this;
     }
 
-    private function getPassword()
+    public function getPassword()
     {
         return $this->password;
     }
 
-    private function getDatabase()
+    public function getDatabase()
     {
         return $this->database;
     }
 
-    private function getKey()
+    public function getKey()
     {
         return $this->key;
     }
 
-    private function getValue()
+    public function getValue()
     {
         return $this->value;
     }
