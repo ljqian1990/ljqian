@@ -1,0 +1,8 @@
+{
+    "autoload": {
+    	"psr-4": {
+    		"Projectname\\":"core/"
+    	},
+    	"files":["../Common/Init.php", "../Common/lib/LoginV2.class.php", "../Common/lib/Tools/UploadFile.class.php"]
+    }
+}
